@@ -65,6 +65,7 @@ export default () => {
 
             <InputArea>
                 <SignInput
+                    autoFocus={true}
                     IconSvg={EmailIcon}
                     placeholder="Digite o seu email"
                     value={emailField}
