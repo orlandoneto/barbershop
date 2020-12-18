@@ -35,6 +35,7 @@ export default () => {
     const [list, setList] = useState([])
     const [refreshing, setRefreshing] = useState(false)
 
+    // Fazendo busca coordenadas para achar a cidade
     const handleLocationFinder = async () => {
         setCoords(null)
 
@@ -74,7 +75,6 @@ export default () => {
         }
 
         let res = await Api.getBarbes(lat, lng, locationText)
-        console.log(res)
         if (res.error === '') {
             if (res.loc) {
                 setLocationText(res.loc)
@@ -97,7 +97,8 @@ export default () => {
         getBarbes()
     }
 
-    const jandleLocationSearch = () => {
+    // Fazendo busca via campo de pesquisa pelo o nome da cidade
+    const handleLocationSearch = () => {
         setCoords({})
         getBarbes()
     }
@@ -120,7 +121,7 @@ export default () => {
                         placeholderTextColor="#FFF"
                         value={locationText}
                         onChangeText={text => setLocationText(text)}
-                        onEndEditing={jandleLocationSearch}
+                        onEndEditing={handleLocationSearch}
                     />
                     <LocationFinder onPress={handleLocationFinder}>
                         <MyLocationIcon width="24" height="24" fill="#FFF" />

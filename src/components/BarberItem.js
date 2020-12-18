@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/native'
+import { useNavigation } from '@react-navigation/native'
 
 import Stars from '../components/Stars'
 
@@ -42,18 +43,29 @@ const SeeProfileButtomText = styled.Text`
 `
 
 export default ({ data }) => {
-    return (
-        <Area>
-            <Avatar source={{ uri: data.avatar }} />
-            <InfoArea>
-                <Username>{data.name}</Username>
+  const navigation = useNavigation()
 
-                <Stars stars={data.stars} showNumber={true} />
+  const handleClick = () => {
+    navigation.navigate('Barber', {
+      id: data.id,
+      avatar: data.avatar,
+      name: data.name,
+      stars: data.stars,
+    })
+  }
 
-                <SeeProfileButtom>
-                    <SeeProfileButtomText>Ver Perfil</SeeProfileButtomText>
-                </SeeProfileButtom>
-            </InfoArea>
-        </Area>
-    )
+  return (
+    <Area onPress={handleClick}>
+      <Avatar source={{ uri: data.avatar }} />
+      <InfoArea>
+        <Username>{data.name}</Username>
+
+        <Stars stars={data.stars} showNumber={true} />
+
+        <SeeProfileButtom>
+          <SeeProfileButtomText>Ver Perfil</SeeProfileButtomText>
+        </SeeProfileButtom>
+      </InfoArea>
+    </Area>
+  )
 }
